@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Profil{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Profil de "{{ user.name }}"</h1>
+
+        <p>Membre de l'application depuis le {{ user.registrationDate|date('d/m/Y H:i') }}.</p>
+
+        <h2>5 dernières citations</h2>
+        <ul>
+        {% for quote in user.quotes %}
+            <li>
+                <blockquote class="blockquote">
+                    <div>
+                        <p class="mb-0">{{ quote.content }}</p>
+                        <footer class="blockquote-footer">
+                            <cite>{{ quote.meta  }}</cite>
+                            {% if is_granted('ROLE_USER') %}
+                                <a href="{{ path('editQuote', {id : quote.id})}}">Modifier</a>
+                                <a href="{{ path('deleteQuote',{id : quote.id})}}">Supprimer</a>
+                            {% endif %}
+                        </footer>
+                    </div>
+
+                </blockquote>
+            </li>
+        {% else %}
+            <li>Aucune citation</li>
+        {% endfor %}
+        </ul>
+
+
+    </div>
+{% endblock %}
+

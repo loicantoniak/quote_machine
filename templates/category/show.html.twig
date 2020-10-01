@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block body %}
+
+    <h2>Catégorie "{{ category.name }}"</h2>
+
+    {% if category.imageName %}
+    <img class="image-category" src="{{ vich_uploader_asset(category, 'imageFile') | imagine_filter('showCategory') }}"/>
+    {% endif %}
+
+    <ul>
+        {% for quote in category.quotes %}
+            <li>
+                <blockquote class="blockquote">
+                    <div>
+                        <p class="mb-0">{{ quote.content }}</p>
+                        <footer class="blockquote-footer">
+                            <cite>{{ quote.meta  }}</cite>
+                            {% if is_granted('ROLE_ADMIN') %}
+                            <a href="{{ path('editQuote', {id : quote.id})}}">Modifier</a>
+                            <a href="{{ path('deleteQuote',{id : quote.id})}}">Supprimer</a>
+                            {% endif %}
+                        </footer>
+                    </div>
+
+                </blockquote>
+            </li>
+        {% else %}
+            <li>Aucune citation</li>
+        {% endfor %}
+    </ul>
+    {% if is_granted('ROLE_ADMIN') %}
+        <a class="btn btn-secondary" href="{{ path('category_edit', {'id': category.id}) }}">Modifier</a>
+        <a  class="btn btn-danger" href="{{ path('category_delete', {'id': category.id}) }}">Supprimer</a>
+    {% endif %}
+
+{% endblock %}

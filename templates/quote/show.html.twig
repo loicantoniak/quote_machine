@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Citation | Quote machine{% endblock %}
+
+{% block body %}
+    <h2>Citation</h2>
+
+        <ul>
+            <li>
+                <blockquote class="blockquote">
+                    <div>
+                        <p class="mb-0">{{ quote.content }}</p>
+                        <footer class="blockquote-footer">
+                            <cite>{{ quote.meta  }}</cite>
+                            {%  if is_granted('ROLE_USER') %}
+                                <a href="{{ path('editQuote', {id : quote.id})}}">Modifier</a>
+                                <a href="{{ path('deleteQuote',{id : quote.id})}}">Supprimer</a>
+                            {% endif %}
+                        </footer>
+                    </div>
+                </blockquote>
+            </li>
+      </ul>
+
+
+{% endblock %}

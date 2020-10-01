@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Top catégories{% endblock %}
+
+{% block body %}
+    <h2>Top des catégories</h2>
+
+    {% for topCategory in topCategories %}
+        {% if topCategory.category.imageName %}
+            <img class="image-category" src="{{ vich_uploader_asset(topCategory.category, 'imageFile') | imagine_filter('topCategory') }}"/>
+        {% endif %}
+        <a href="{{ path('category_show',{id : topCategory.category.id})}}">{{ topCategory.category }}</a>
+        {% if topCategory.count > 1 %}
+            <p>{{ topCategory.count }} Citations.</p>
+        {% else %}
+            <p>{{ topCategory.count }} Citation.</p>
+        {% endif %}
+
+    {% else %}
+        <li>Aucune categorie</li>
+    {% endfor %}
+
+{% endblock %}

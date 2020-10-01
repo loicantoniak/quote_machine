@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une citation{% endblock %}
+
+
+{% block body %}
+    <h1>Modification d'une citation</h1>
+
+    {{ form_start(form) }}
+    {{ form_row(form.content, {'label': 'Contenu'}) }}
+    {{ form_row(form.meta, {'label': 'Meta'}) }}
+    {{ form_row(form.category, {'label': 'Catégorie', 'placeholder' : 'Catégories...'}) }}
+    {{ form_row(form.save, {'label': 'Mettre à jour'}) }}
+    {{ form_end(form) }}
+
+
+{% endblock %}

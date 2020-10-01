@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quote-machine{% endblock %}
+
+{% block body %}
+    <h1>Citation aléatoire </h1>
+
+    <ul>
+        <li>
+            <blockquote class="blockquote">
+                <div>
+                    <p class="mb-0">{{ quote.content }}</p>
+                    <footer class="blockquote-footer">
+                        <cite>{{ quote.meta  }}</cite>
+                    </footer>
+                </div>
+
+            </blockquote>
+        </li>
+    </ul>
+
+{% endblock %}
+

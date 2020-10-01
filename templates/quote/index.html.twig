@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Quote-machine{% endblock %}
+
+{% block body %}
+    <h1>Liste des citations</h1>
+
+
+       {% for quote in pagination %}
+           <ul>
+                <li>
+                    <blockquote class="blockquote">
+                        <div>
+                            <p class="mb-0">{{ quote.content }}</p>
+                            <footer class="blockquote-footer">
+                                <cite>{{ quote.meta }}</cite>
+                                <a href="{{ path('quote_show', {id : quote.id})}}">Voir</a>
+                                {% if is_granted('ROLE_USER') %}
+                                <a href="{{ path('editQuote', {id : quote.id})}}">Modifier</a>
+                                <a href="{{ path('deleteQuote',{id : quote.id})}}">Supprimer</a>
+                                {% endif %}
+
+                            {% if quote.category != null %}
+                                <a href="{{ path('category_show',{id : quote.category.id})}}"><span class="badge badge-dark">{{ quote.category }}</span></a>
+                            {% endif %}
+                            </footer>
+                            <p>Le {{quote.createdAt|date('d/m/Y H:i')}} par
+                                <a href="{{ path('user',{id : quote.Author.id})}}">{{ quote.Author }}</a>
+                            </p>
+
+                        </div>
+
+                    </blockquote>
+                </li>
+           </ul>
+       {% else %}
+           <li>Aucune citation</li>
+       {% endfor %}
+
+        <div class="pagination">
+            {{ knp_pagination_render(pagination) }}
+        </div>
+
+{% endblock %}
+
+

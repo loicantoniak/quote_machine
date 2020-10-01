@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Modifier une catégorie{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <h1>Modification d'une catégorie</h1>
+
+        <div class="row">
+            <div class="col-4"></div>
+            <div class="col-4">
+                {{ form_start(form) }}
+
+                {{ form_row(form.name, {'label': 'Nom'}) }}
+                {{ form_row(form.imageFile, {'label': 'Image'}) }}
+                {{ form_row(form.save, {'label': 'Modifier'}) }}
+                {{ form_end(form) }}
+            </div>
+            <div class="col-4"></div>
+        </div>
+    </div>
+
+
+{% endblock %}
